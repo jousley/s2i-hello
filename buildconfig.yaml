@@ -1,0 +1,28 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+    name: frontend
+spec:
+  runPolicy: Serial
+  source:
+    dockerfile: |
+      FROM registry.access.redhat.com/ubi9-minimal:latest 
+      RUN microdnf -y update && \
+          microdnf install -y nginx
+
+      COPY index.html /usr/share/nginx/html
+      COPY nginx.conf /etc/nginx/nginx.conf
+      COPY app.js /usr/share/nginx/html
+      COPY styles.css /usr/share/nginx/html
+
+
+      CMD /usr/sbin/nginx -g 'daemon off;'
+
+  strategy:
+    type: Docker
+    dockerStrategy:
+      noCache: false
+  output:
+    to:
+      kind: ImageStreamTag
+      name: "frontend:latest"
