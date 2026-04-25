@@ -38,6 +38,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 #COPY app.js /usr/share/nginx/html
 #COPY styles.css /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD /usr/sbin/nginx -g 'daemon off;'
