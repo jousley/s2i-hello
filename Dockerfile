@@ -34,9 +34,10 @@ RUN microdnf -y update && \
 RUN mkdir -p /usr/share/nginx/html
 
 COPY index.html /usr/share/nginx/html
-#COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 #COPY app.js /usr/share/nginx/html
 #COPY styles.css /usr/share/nginx/html
 
+EXPOSE 8080
 
 CMD /usr/sbin/nginx -g 'daemon off;'
